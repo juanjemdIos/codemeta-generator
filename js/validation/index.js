@@ -133,7 +133,7 @@ function migrateRemoteRepository() {
     const apiUrl = CONFIG.fastapi_url.replace(/\/$/, ""); 
     fetch(`${apiUrl}/metadata?url=${encodeURIComponent(repoUrl)}&threshold=0.8&ignoreClassifiers=false`, 
     requestOptions)
-    // fetch('./server/generated-files/somef_code_authors.json')
+    // fetch('./server/generated-files/gammalearn_test.json')
     .then(response => {
 
         if (!response.ok) {
@@ -455,6 +455,10 @@ function populateFieldsCodemeta(metadata) {
 
     if (metadata.author && metadata.author.length > 0) {
         populateAuthors(metadata.author, false)
+    }
+
+    if (metadata.contributor && metadata.contributor.length > 0) {
+        importPersons('contributor', 'Contributor', metadata.contributor);
     }
 }
 
